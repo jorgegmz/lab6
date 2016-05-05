@@ -1,5 +1,6 @@
 package com.example.jag028.service_test;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -48,5 +49,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void starter(View view){
+        Intent intent = new Intent(MainActivity.this, DemoService.class);
+        startService(intent);
+    }
+
+    public void stopper(View view){
+        Intent intent = new Intent(MainActivity.this, DemoService.class);
+        stopService(intent);
     }
 }

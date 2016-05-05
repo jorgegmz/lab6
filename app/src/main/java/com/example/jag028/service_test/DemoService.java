@@ -3,6 +3,7 @@ package com.example.jag028.service_test;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.view.View;
 import android.widget.Toast;
 
 public class DemoService extends Service {
@@ -20,4 +21,12 @@ public class DemoService extends Service {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+    @Override
+    public void onDestroy(){
+        Toast.makeText(DemoService.this, "Service Stopped", Toast.LENGTH_SHORT).show();
+        super.onDestroy();
+    }
+
+
 }
