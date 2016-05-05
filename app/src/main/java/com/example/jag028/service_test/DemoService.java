@@ -10,9 +10,39 @@ public class DemoService extends Service {
     public DemoService() {
     }
 
+    final class MyThread implements Runnable{
+        int startId;
+        public MyThread(int startId){
+            this.startId = startId;
+        }
+        @Override
+        public void run(){
+            synchronized (this){
+                try{
+                    wait(15000);
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+                stopSelf(startId);
+            }
+        }
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         Toast.makeText(DemoService.this, "Service Started", Toast.LENGTH_SHORT).show();
+        Thread thread = new Thread(new MyThread(startId));
+        thread.start();
+        /**synchronized (this){
+            try{
+                wait(15000);
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            stopSelf();
+        }*/
         return super.onStartCommand(intent, flags, startId);
     }
 
